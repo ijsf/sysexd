@@ -68,6 +68,9 @@ if (APPLE)
   endif()
 endif()
 
+# Enable C++11
+set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11")
+
 # vendor libraries
 set (SYSEXD_VENDOR_LIBRARIES rtmidi)
 add_subdirectory (vendor/rtmidi)
