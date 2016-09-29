@@ -52,6 +52,22 @@ else ()
     message (FATAL_ERROR "Failed to find required dependency: boost")
 endif ()
 
+# OS X frameworks
+if (APPLE)
+  find_library(COREMIDI CoreMIDI)
+  find_library(COREFOUNDATION CoreFoundation)
+  find_library(COREAUDIO CoreAudio)
+  if (NOT COREMIDI)
+    message (FATAL_ERROR "CoreMIDI framework not found")
+  endif()
+  if (NOT COREFOUNDATION)
+    message (FATAL_ERROR "CoreFoundation framework not found")
+  endif()
+  if (NOT COREAUDIO)
+    message (FATAL_ERROR "CoreAudio framework not found")
+  endif()
+endif()
+
 # vendor libraries
 set (SYSEXD_VENDOR_LIBRARIES rtmidi)
 add_subdirectory (vendor/rtmidi)
