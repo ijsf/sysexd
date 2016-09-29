@@ -29,12 +29,27 @@ macro (build_executable TARGET_NAME)
 
     add_executable (${TARGET_NAME} ${ARGN})
 
-    include_directories (${SYSEXD_ROOT} ${SYSEXD_INCLUDE})
+    # add vendor linking
+    include_directories (${SYSEXD_ROOT} ${SYSEXD_VENDOR_LIBRARIES})
+    target_link_libraries (${TARGET_NAME} ${SYSEXD_VENDOR_LIBRARIES})
+
+    include_directories (${SYSEXD_ROOT} ${SYSEXD_VENDOR_INCLUDE})
 
     target_link_libraries(${TARGET_NAME} ${SYSEXD_PLATFORM_LIBS})
 
     set_target_properties (${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${SYSEXD_BIN})
     set_target_properties (${TARGET_NAME} PROPERTIES DEBUG_POSTFIX d)
+endmacro ()
+
+# Build vendor library
+macro (build_vendor TARGET_NAME)
+    set (TARGET_LIB_TYPE "VENDOR")
+    message (STATUS "-- Build Type:")
+    message (STATUS "       " ${TARGET_LIB_TYPE})
+
+    add_library (${TARGET_NAME} ${ARGN})
+
+    include_directories (${SYSEXD_ROOT} ${SYSEXD_INCLUDE})
 endmacro ()
 
 # Build executable and register as test
@@ -48,7 +63,7 @@ macro (build_test TARGET_NAME)
     endif ()
 endmacro ()
 
-# Finalize target for all types
+# Finalize target for all types except vendor
 macro (final_target)
     if ("${TARGET_LIB_TYPE}" STREQUAL "EXECUTABLE")
         install (TARGETS ${TARGET_NAME} 
@@ -66,14 +81,6 @@ endmacro ()
 
 macro (link_boost)
     target_link_libraries (${TARGET_NAME} ${Boost_LIBRARIES})
-endmacro ()
-
-macro (link_openssl)
-    target_link_libraries (${TARGET_NAME} ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY})
-endmacro ()
-
-macro (link_zlib)
-	target_link_libraries (${TARGET_NAME} ${ZLIB_LIBRARIES})
 endmacro ()
 
 macro (include_subdirs PARENT)

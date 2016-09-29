@@ -18,7 +18,6 @@ set (SYSEXD_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (SYSEXD_INCLUDE ${SYSEXD_ROOT}/include)
 set (SYSEXD_BUILD_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 set (SYSEXD_BIN ${SYSEXD_BUILD_ROOT}/bin)
-set (SYSEXD_LIB ${SYSEXD_BUILD_ROOT}/lib)
 
 set (Boost_FIND_REQUIRED TRUE)
 set (Boost_FIND_QUIETLY TRUE)
@@ -53,4 +52,9 @@ else ()
     message (FATAL_ERROR "Failed to find required dependency: boost")
 endif ()
 
+# vendor libraries
+set (SYSEXD_VENDOR_LIBRARIES rtmidi)
+add_subdirectory (vendor/rtmidi)
+
+# application
 add_subdirectory (src)
