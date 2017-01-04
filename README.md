@@ -14,5 +14,5 @@ Although the [Web MIDI API](https://www.w3.org/TR/webmidi/) is currently under d
 
 ## Examples
 
-An example of use for sysexd can be found at [wer.si](http://wer.si)
+An example of use for sysexd can be found at [wer.si](http://wer.si).
 
