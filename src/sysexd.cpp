@@ -396,9 +396,9 @@ private:
       
       // Open the specified port
       try {
-        m_midiIn->openPort(port);
         m_midiIn->setCallback(&SysexInterface::midiMessageHandler, (void *)this);
-        m_midiIn->ignoreTypes(false, false, false);
+        m_midiIn->openPort(port);
+        m_midiIn->ignoreTypes(false, true, true);
         if (m_debug) {
           std::cout << "sysexd: " << "set input port to " << port << " (" << m_midiIn->getPortName(port) << ")" << std::endl;
         }
@@ -468,8 +468,8 @@ private:
 
       // Create MIDI interfaces
       try {
-        m_midiIn = new RtMidiIn();
-        m_midiOut = new RtMidiOut();
+        m_midiIn = new RtMidiIn(RtMidi::UNSPECIFIED, "sysexd");
+        m_midiOut = new RtMidiOut(RtMidi::UNSPECIFIED, "sysexd");
       } catch(RtMidiError &e) {
         std::cerr << "Could not create MIDI interface: " << e.what() << std::endl;
         return false;
