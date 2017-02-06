@@ -13,6 +13,7 @@
 // std
 #include <iostream>
 #include <set>
+#include <thread>
 
 class SysexServer {
 public:
@@ -309,7 +310,6 @@ private:
     const static unsigned int INVALID_PORT = -1;
     
     const static unsigned int RETRIES = 10;
-    const static unsigned int SLEEP = 150000;
     
     typedef std::function<void(const std::string)> errorCallback_t;
     typedef std::function<void(const std::string)> messageCallback_t;
@@ -351,7 +351,8 @@ private:
       if (resend) {
         unsigned int retries = 0;
         while(retries < RETRIES) {
-          usleep(SLEEP);
+          using namespace std::literals;
+          std::this_thread::sleep_for(150ms);
           if (state == 0) {
             // Message received
             return;

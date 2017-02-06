@@ -19,6 +19,12 @@ set (SYSEXD_INCLUDE ${SYSEXD_ROOT}/include)
 set (SYSEXD_BUILD_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 set (SYSEXD_BIN ${SYSEXD_BUILD_ROOT}/bin)
 
+# Make sure boost is linked in statically on Win32
+if (WIN32)
+	message (STATUS "Detected Windows system (statically linking boost)")
+	set(Boost_USE_STATIC_LIBS ON)
+endif()
+
 set (Boost_FIND_REQUIRED TRUE)
 set (Boost_FIND_QUIETLY TRUE)
 set (Boost_DEBUG FALSE)
@@ -70,6 +76,9 @@ endif()
 
 # Enable C++11
 set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11")
+
+# vendor includes
+set (SYSEXD_VENDOR_INCLUDE ${SYSEXD_ROOT}/vendor/websocketpp ${SYSEXD_ROOT}/vendor/rtmidi)
 
 # vendor libraries
 set (SYSEXD_VENDOR_LIBRARIES rtmidi)
