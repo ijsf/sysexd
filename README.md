@@ -4,6 +4,30 @@ This daemon allows applications to communicate SysEx messages over MIDI using We
 
 As such, it opens a WebSockets-enabled HTTP server on a predefined port (e.g. 9002) on the local host, on which the host's MIDI interfaces are exposed.
 
+## Installation instructions
+
+### Windows
+
+If you don't feel like building sysexd, head over to https://github.com/ijsf/sysexd/releases to download the latest binary and just run it.
+
+### OSX/*nix
+
+For these platforms, it is required to build sysexd. First, make sure you have the following already installed:
+
+* Boost - e.g. `brew install boost` on OSX using Homebrew.
+
+Now generate the makefiles using CMake:
+
+    cmake .
+
+If no errors have occurred, build sysexd:
+
+    make
+
+If the build was successful, you should now be able to run sysexd as follows:
+
+    ./bin/sysexd
+
 ## Why use a daemon?
 
 Although the [Web MIDI API](https://www.w3.org/TR/webmidi/) is currently under development for browsers, there a number of situations where a daemon may have advantages:
