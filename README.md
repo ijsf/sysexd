@@ -12,9 +12,10 @@ If you don't feel like building sysexd, head over to https://github.com/ijsf/sys
 
 ### OSX/*nix
 
-For these platforms, it is required to build sysexd. First, make sure you have the following already installed:
+For these platforms, it is required to build sysexd. First, make sure you have the following requirements:
 
-* Boost - e.g. `brew install boost` on OSX using Homebrew.
+* Boost - install with `brew install boost`.
+* CMake - install with `brew install cmake`.
 
 Now generate the makefiles using CMake:
 
