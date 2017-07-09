@@ -14,9 +14,10 @@ If you don't feel like building sysexd, head over to https://github.com/ijsf/sys
 
 For these platforms, it is required to build sysexd. First, make sure you have the following requirements:
 
-* XCode - for more information e.g. see http://railsapps.github.io/xcode-command-line-tools.html.
-* Boost - install with `brew install boost`.
-* CMake - install with `brew install cmake`.
+1. XCode - for more information e.g. see http://railsapps.github.io/xcode-command-line-tools.html.
+2. Homebrew - for more information e.g. see http://brew.sh.
+3. Boost - install with `brew install boost`.
+4. CMake - install with `brew install cmake`.
 
 Now generate the makefiles using CMake:
 
