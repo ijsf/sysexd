@@ -14,6 +14,7 @@
 #include <iostream>
 #include <set>
 #include <thread>
+#include <chrono>
 
 class SysexServer {
 public:
@@ -351,7 +352,7 @@ private:
       if (resend) {
         unsigned int retries = 0;
         while(retries < RETRIES) {
-          using namespace std::literals;
+          using namespace std::chrono_literals;
           std::this_thread::sleep_for(150ms);
           if (state == 0) {
             // Message received
